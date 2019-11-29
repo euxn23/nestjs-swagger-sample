@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.0",
+    "x-origin": [
+        {
+            "url": "http://localhost:8081/api-json",
+            "format": "swagger",
+            "version": "2.0",
+            "converter": {
+                "url": "https://github.com/mermade/oas-kit",
+                "version": "5.3.1"
+            }
+        }
+    ],
+    "info": {
+        "description": "NestJS Swagger Sample App API",
+        "version": "1.0",
+        "title": "NestJS Swagger Sample"
+    },
+    "tags": [],
+    "paths": {
+        "/users": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "userIds",
+                        "required": true,
+                        "in": "query",
+                        "example": "10",
+                        "description": "finding user ID string, or ID array"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "fetch users by query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUsersResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "GetUsersResponse": {
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "example": [
+                            {
+                                "id": "10",
+                                "name": "Alice",
+                                "followingUserIds": [
+                                    "11"
+                                ]
+                            },
+                            {
+                                "id": "11",
+                                "name": "Beth",
+                                "followingUserIds": []
+                            }
+                        ],
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "users"
+                ]
+            }
+        }
+    }
+}
